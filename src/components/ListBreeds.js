@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 
 class ListBreeds extends Component {
 
@@ -12,10 +14,13 @@ class ListBreeds extends Component {
             // console.log(dogBreeds);
             const dogBreedsArray = Object.keys(dogBreeds)
             // console.log(dogBreedsArray);
-
+            
             // pass payload as argument to setBreeds
             this.setBreeds(dogBreedsArray)
             // this.setState({dogBreeds: dogBreedsArray})
+
+            
+
         }
         catch (err) {
             console.log('fetch failed', err);
@@ -45,10 +50,11 @@ class ListBreeds extends Component {
         // console.log('The state > ', this.state);
 
         return <>
+
             <h1>Dog breeds:</h1>
             <ul>
             {this.props.dogBreeds === null ? <span>Loading</span> : this.props.dogBreeds.map((breed, index) => {
-                return <li key={index}>{breed}</li>
+                return <Link to={`/dog/breed/${breed}`} key={index}><li>{breed}</li></Link>
             }) }
             </ul>
         </>
