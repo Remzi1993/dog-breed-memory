@@ -1,14 +1,14 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import DogList from './components/dog-list-page'
+import ListBreeds from './components/ListBreeds'
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <DogList/>
+        <ListBreeds/>
       </header>
     </div>
   );
