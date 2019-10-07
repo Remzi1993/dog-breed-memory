@@ -9,12 +9,13 @@ class ListBreeds extends Component {
         try {
             const response = await fetch('https://dog.ceo/api/breeds/list/all');
             // console.log(response);
-            const getData = await response.json()
-            const dogBreeds = getData.message
+            const data = await response.json()
+            const dogBreeds = data.message
             // console.log(dogBreeds);
             const dogBreedsArray = Object.keys(dogBreeds)
             // console.log(dogBreedsArray);
-
+            
+            // pass payload as argument to setBreeds
             this.setBreeds(dogBreedsArray)
             // this.setState({dogBreeds: dogBreedsArray})
 
