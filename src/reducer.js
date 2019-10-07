@@ -1,5 +1,11 @@
-const reducer = (state = [], action = {}) => {
+const initialState = {
+    dogBreeds: null
+}
+
+const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
+        case 'ADD_BREEDS':
+            return { ...state, dogBreeds: action.payload }
         default:
             return state
     }

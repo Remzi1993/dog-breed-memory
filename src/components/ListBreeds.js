@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class ListBreeds extends Component {
-    state = {
-        dogBreeds: null
-    }
 
     getAllBreeds = async () => {
         try {
@@ -15,7 +12,8 @@ class ListBreeds extends Component {
             // console.log(dogBreeds);
             const dogBreedsArray = Object.keys(dogBreeds)
             // console.log(dogBreedsArray);
-            this.setState({dogBreeds: dogBreedsArray})
+            this.setBreeds(dogBreedsArray)
+            // this.setState({dogBreeds: dogBreedsArray})
         }
         catch (err) {
             console.log('fetch failed', err);
@@ -30,18 +28,24 @@ class ListBreeds extends Component {
 
     }
 
+    setBreeds = (payload) => {
+        // console.log(payload);
+        
+        const action = {
+            type: 'ADD_BREEDS',
+            payload: payload
+        }
+
+        this.props.dispatch(action)
+    }
+
     render() {
         // console.log('The state > ', this.state);
-        console.log(this.getAllBreeds());
-        
-        // const breeds = this.getAllBreeds()
-
-        
 
         return <>
             <h1>Dog breeds:</h1>
             <ul>
-            {this.state.dogBreeds === null ? <span>Loading</span> : this.state.dogBreeds.map((breed, index) => {
+            {this.props.dogBreeds === null ? <span>Loading</span> : this.props.dogBreeds.map((breed, index) => {
                 return <li key={index}>{breed}</li>
             }) }
             </ul>
@@ -55,7 +59,7 @@ const mapStateToProps = (state) => {
     // console.log('STATE OF THE STORE IN MSTP', state)
 
     return {
-        dogs: state
+        dogBreeds: state.dogBreeds
     }
 }
 
