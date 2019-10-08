@@ -6,12 +6,12 @@ export default class BreedDetailsContainer extends Component {
     state = { images: null }
   
     componentDidMount() {
-      const breed = this.props.match.params.breed
+      const breed = this.props.match.params.breed  
       request
         .get(`https://dog.ceo/api/breed/${encodeURIComponent(breed)}/images`)
         .then(response => {
             console.log(response.body.message)
-            return this.updateImages(response.body.message)})
+            return this.updateImages(response.body.message.slice(0, 10))})
         .catch(console.error)
     }
   
