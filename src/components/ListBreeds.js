@@ -28,7 +28,9 @@ class ListBreeds extends Component {
     }
 
     componentDidMount() {
-        this.getAllBreeds()        
+        if (this.props.dogBreeds === null ) {
+            this.getAllBreeds()
+        }
     }
 
     componentWillUnmount() {
