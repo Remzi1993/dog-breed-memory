@@ -3,15 +3,15 @@ import React from 'react';
 import './App.css';
 import ListBreeds from './components/ListBreeds'
 import {Route} from 'react-router-dom'
-import BreedDetails from './components/BreedDetails'
+import BreedDetailsContainer from './components/BreedsDetailsContainer'
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Route exact path="/"> <ListBreeds/></Route>  
-        <Route exact path="/dog/breed/:breed"><BreedDetails /></Route>
+        <Route component={ListBreeds} exact path="/"/>  
+        <Route component={BreedDetailsContainer}exact path="/dog/breed/:breed"/>
        
       </header>
     </div>
