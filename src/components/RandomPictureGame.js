@@ -15,6 +15,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchRandomPic } from '../actions/getRandomPic' 
+import { fetchBreedList } from '../actions/breeds' 
+import { log } from 'util'
 
 
 
@@ -23,6 +25,7 @@ class RandomPictureGame extends Component {
 
     componentDidMount(){
         this.props.fetchRandomPic()
+        this.props.fetchBreedList()
         
     }
 
@@ -43,31 +46,57 @@ class RandomPictureGame extends Component {
 
 
     render() {
-        console.log('From the store > ', this.props.RandomPicture);
+        // console.log('From the store > ', this.props.RandomPicture);
+        // console.log('breeds from the store > ', this.props.breeds);
+       
+
+
         const randomPicture = this.props.RandomPicture
+        const dogBreeds =this.props.breeds
+
         // Below we split the url with / than we get an array, sometimes in that array we get also the alternative name
         // we split that also en we select the first item
         const currentDog = randomPicture === null ? null : randomPicture.split('/')[4].split('-')[0]
-        console.log('Current dog > ', currentDog);
+        // console.log('Current dog > ', currentDog);
+        // console.log('dog breeds', dogBreeds)
+
+       const randomBreed1 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+       const randomBreed2 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+        //    console.log('random breed1>', randomBreed1);
+        //    console.log('random2>', randomBreed2);
+
+        const options = new Set([currentDog, randomBreed1, randomBreed2])
+        console.log([...options]);
+        
+        
+       const arrayOfOptions = [...options]
+
+        
 
 
 
 
         return <>
+          <button onClick={() => this.props.history.push('/')}>Go Back</button><br/>
          
-           <img src={this.props.RandomPicture} alt="Random" style={{ maxWidth: '80%' }}/>
+           <img src={this.props.RandomPicture} alt="Random" style={{ maxWidth: '80%' }}/><br/>
 
-            <button onClick={() => this.props.history.push('/')}>Go Back</button>
+          
+           <button>Option 1 : {arrayOfOptions[0]}</button><br/>
+            <button>Option 2 : {arrayOfOptions[1]}</button><br/>
+            <button>Option 3 : {arrayOfOptions[2]}</button>
         </>
     }
 }
 const mapDispatchToProps = {
-    fetchRandomPic
+    fetchRandomPic,    
+    fetchBreedList
   }
   
   const mapStateToProps = (state) => {
     return {
-        RandomPicture: state.picture
+        RandomPicture: state.picture,
+        breeds: state.breeds
     }
   }
   
