@@ -1,11 +1,11 @@
 const initialState = {
-    dogBreeds: null
+    breeds: []
 }
 
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
-        case 'ADD_BREEDS':
-            return { ...state, dogBreeds: action.payload }
+        case 'SET_BREED_LIST':
+            return { ...state, breeds: action.payload }
         default:
             return state
     }
