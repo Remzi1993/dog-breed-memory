@@ -1,5 +1,17 @@
-const reducer = (state = [], action = {}) => {
+const initialState = {
+    breeds: [],
+    images: null,
+    picture: null
+}
+
+const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
+        case 'SET_BREED_LIST':
+            return { ...state, breeds: action.payload } // dogBreeds
+        case 'SET_BREED_DETAILS':
+            return { ...state, images: action.payload } // SpecificDogBreedImages
+        case 'SET_RANDOM_PIC':
+            return { ...state, picture: action.payload } // RandomDogBreedImage
         default:
             return state
     }
