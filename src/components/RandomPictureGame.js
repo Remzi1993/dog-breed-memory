@@ -1,12 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchRandomPic } from '../actions/getRandomPic'
+import { fetchBreedList } from '../actions/breeds'
+import Render from './render/RandomPictureGame'
 
-export default function RandomPictureGame(props) {
-    // console.log(props);
-    
-    if(!props.arrayOfOptions) {
-        return '.....loading!'
+
+class RandomPictureGame extends Component {
+    state = {
+        arrayOfOptions: []
     }
-    function shuffle(array) {
+
+    componentDidMount() {
+        this.props.fetchRandomPic()
+        this.props.fetchBreedList()
+    }
+
+    handleClick = (event) => {
+        // console.log('Button value > ', event.target.value);
+        if (event.target.value === this.getCurrentDog()) {
+            this.props.fetchRandomPic()
+        }
+    }
+
+    getCurrentDog() {
+        const randomPicture = this.props.randomPicture
+        // Below we split the url with / than we get an array, sometimes in that array we get also the alternative name
+        // we split that also en we select the first item
+        return randomPicture === null ? null : randomPicture.split('/')[4].split('-')[0]
+    }
+
+    shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
       
         // While there remain elements to shuffle...
@@ -25,15 +48,42 @@ export default function RandomPictureGame(props) {
         return array;
     }
 
-    const shuffledOptions = shuffle(props.arrayOfOptions)
+    render() {
+        const dogBreeds = this.props.breeds
+        const randomBreed1 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+        const randomBreed2 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
 
-    return <>
-        <button onClick={() => props.history.push('/')}>Go Back</button><br/>
-        <img src={props.randomPicture} alt="Random dog" style={{ maxWidth: '80%' }}/><br/>
-            
-        <button onClick={props.handleClick} value={shuffledOptions[0]}>Option 1 > {shuffledOptions[0]}</button><br/>
-        <button onClick={props.handleClick} value={shuffledOptions[1]}>Option 2 > {shuffledOptions[1]}</button><br/>
-        <button onClick={props.handleClick} value={shuffledOptions[2]}>Option 3 > {shuffledOptions[2]}</button><br/>
-    </>
-    
+        // console.log('Random breed 1 > ', randomBreed1);
+        // console.log('Random breed 2 > ', randomBreed2);
+
+        const options = new Set([this.getCurrentDog(), randomBreed1, randomBreed2]);
+
+        const arrayOfOptions = [...options]
+
+        return <>
+            <Render
+                randomPicture = {this.props.randomPicture}
+                arrayOfOptions = {arrayOfOptions}
+                breeds = {this.state.breeds}
+                history = {this.props.history}
+                handleClick = {this.handleClick}
+                shuffle = {this.shuffle}
+            />
+        </>
+
+    }
 }
+
+const mapDispatchToProps = {
+    fetchRandomPic,
+    fetchBreedList
+}
+
+const mapStateToProps = (state) => {
+    return {
+        randomPicture: state.picture,
+        breeds: state.breeds
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RandomPictureGame);

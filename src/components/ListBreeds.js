@@ -12,17 +12,15 @@ class ListBreeds extends Component {
     }
 
     render() {
-        // console.log('The state > ', this.state);
-
         return <>
-            <button onClick={() => this.props.history.push('/')}>Go Back</button>
-            <h1>Dog breeds:</h1>
+            <h2 className="content-subhead">Dog breeds</h2>
+            <button onClick={() => this.props.history.push('/')} className="pure-button pure-button-primary">Go Back</button>
             <ul>
             {this.props.breeds === null ? <span>Loading</span> : this.props.breeds.map((breed, index) => {
-                return <Link to={`/dog/breed/${breed}`} key={index}><li>{breed}</li></Link>
+                return <Link to={`/breeds/${breed}`} key={index}><li>{breed}</li></Link>
             }) }
             </ul>
-            <button onClick={() => this.props.history.push('/')}>Go Back</button>
+            <button onClick={() => this.props.history.push('/')} className="pure-button pure-button-primary">Go Back</button>
         </>
     }
 }

@@ -1,33 +1,19 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setBreedList, fetchBreedList } from '../actions/breeds' 
 
 class HomePage extends Component {
 
-  componentDidMount(){
-    // fetch('https://dog.ceo/api/breeds/list/all')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     // Classic dispatch (proven technology)
-    //     // console.log(Object.keys(data.message))
-    //     // const action = {
-    //     //   type: 'SET_BREED_LIST',
-    //     //   payload: Object.keys(data.message)
-    //     // }
-
-    //     // this.props.dispatch(action)
-
-    //     // using action creator (sync)
-    //     this.props.setBreedList(Object.keys(data.message))
-    //   })
-    this.props.fetchBreedList()
-  }
-
   render () {
     return <>
-          <Link to="/list-breeds">List all breeds</Link>
-          <Link to="/game-1">Random picture game</Link>
+      <h2 className="content-subhead">🐕🐩 Dog breed memorization game. 🐕🐩</h2>
+      <p>📋 Features 📋</p>
+      <ol>
+        <li>The app should have a dog list page where it lists all the breeds, so the user can memorise the names of all the breeds.</li>
+        <li>When you click one of the breeds on the doglist page you should go to a page that shows 10 pictures of that breed. So the user can see what a breed looks like.</li>
+        <li>The app contains a game which must show the user a random picture of a dog and it must ask the user to choose the correct breed name from a list of 3 options.</li>
+        <li>When a user makes the correct choice, they proceed to the next question.</li>
+      </ol>
     </>
   }
 }
