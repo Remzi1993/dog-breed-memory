@@ -6,6 +6,8 @@ const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
         case 'SET_BREED_LIST':
             return { ...state, breeds: action.payload }
+        case 'SET_BREED_DETAILS':
+            return { ...state, images: action.payload }
         default:
             return state
     }
