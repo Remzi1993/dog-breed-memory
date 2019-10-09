@@ -1,5 +1,8 @@
 const initialState = {
-    breeds: []
+    breeds: [],
+    images: null,
+    picture: null
+    
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -8,6 +11,8 @@ const reducer = (state = initialState, action = {}) => {
             return { ...state, breeds: action.payload }
         case 'SET_BREED_DETAILS':
             return { ...state, images: action.payload }
+        case 'SET_RANDOM_PIC':
+            return { ...state, picture: action.payload }
         default:
             return state
     }
