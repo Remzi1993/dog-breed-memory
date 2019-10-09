@@ -13,12 +13,85 @@
 
 
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+
 
 class RandomPictureGame extends Component {
+    state = {
+        RandomPicture: null
+    }
+
+    GetRandomPicture = async () => {
+        try {
+            const response = await fetch('https://dog.ceo/api/breeds/image/random');
+            // console.log(response);
+            const data = await response.json()
+            const url = data.message
+            // console.log('URL > ', url);
+            this.setState({ RandomPicture: url })
+
+
+
+
+            
+            // const randomBreedArray = Object.keys(dogBreeds)
+            // console.log(randomBreedArray);
+            
+
+            // pass payload as argument to setBreeds
+            // this.setRandomImage(randomBreedArray)
+            // this.setState({dogBreeds: dogBreedsArray})
+        }
+        catch (err) {
+            console.log('fetch failed', err);
+        }
+    }
+
+    quiz() {
+        // console.log('From the store > ', this.props.dogBreeds);
+
+        // Below we split the url with / than we get an array, sometimes in that array we get also the alternative name
+        // we split that also en we select the first item 
+
+        // console.log(this.state.RandomPicture);
+
+        
+        // const randomBreed = this.state.RandomPicture.split('/')[4].split('-')[0]
+
+        // console.log('The dog in the picture > ', randomBreed);
+
+        
+        // items[Math.floor(Math.random() * items.length)]
+    }
+
+    componentDidMount() {
+        // this.GetRandomPicture()
+        // if (this.props.dogBreeds === null ) {
+        //     this.GetRandomPicture()
+        // }
+    }
+
+
     render() {
-        return <>Test 394350</>
+        // console.log('The local state > ', this.state);
+        // this.state.RandomPicture === null ? <span>Loading quiz..</span>this.quiz()
+   
+        return <>
+        <button onClick={() => this.props.history.push('/')}>Go Back</button><br/>
+        {/* <img src={this.state.RandomPicture} alt="Random dog breed"/> */}
+        Test 394350</>
     }
 }
 
-export default RandomPictureGame
+// export default RandomPictureGame
+
+
+const mapStateToProps = (state) => {
+    // console.log('STATE OF THE STORE IN MSTP', state)
+
+    return {
+        dogBreeds: state.dogBreeds
+    }
+}
+
+export default connect(mapStateToProps)(RandomPictureGame)
