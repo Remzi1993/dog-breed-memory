@@ -1,5 +1,8 @@
 const initialState = {
-    breeds: []
+    breeds: [],
+    images: null,
+    picture: null
+    
 }
 
 const reducer = (state = initialState, action = {}) => {
