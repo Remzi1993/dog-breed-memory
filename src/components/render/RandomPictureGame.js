@@ -3,19 +3,30 @@ import Button from './Button';
 
 export default (props) => {
     // console.log(props);
-    if(!props.arrayOfOptions) {
-        return '.....loading!'
+    if (props.shuffledOptions.length === 0) {
+        return <h2 className="content-subhead">Loading...</h2>
     }
-    const shuffledOptions = props.shuffle(props.arrayOfOptions)
-    
+
+    console.log(props.playerAnswer); 
+
     return <>
-        <h2 className="content-subhead">Game 1</h2>
+        <h2 className="content-subhead">The Dog Quiz</h2>
         <p>Random dog game</p>
         <button onClick={() => props.history.push('/')} className="pure-button pure-button-primary">Go Back</button><br/><br/>
+
+        <h3>Do you know the breed?</h3>
         <div className="pure-u-1"><img className="pure-img-responsive" src={props.randomDogImage} alt="Random dog" /></div>
-        {shuffledOptions.map((option, index) => (
-            <Button key={index} onClick={props.handleClick} value={option}>{option}</Button>
-        ))}
+        
+
+        { (props.playerAnswer === false) ? <p>
+            <button className="button-error pure-button">Your answer is incorrect!</button>
+            <button className="button-success pure-button">The right answer is: {props.rightAnswer}</button>
+        </p> : <p>
+            {props.shuffledOptions.map((option, index) => (
+                <Button key={index} onClick={props.handleClick} value={option}>{option}</Button>
+            ))}
+        </p> }
+        
         {/* <button onClick={props.handleClick} value={shuffledOptions[0]}>Option 1 > {shuffledOptions[0]}</button><br/>
         <button onClick={props.handleClick} value={shuffledOptions[1]}>Option 2 > {shuffledOptions[1]}</button><br/>
         <button onClick={props.handleClick} value={shuffledOptions[2]}>Option 3 > {shuffledOptions[2]}</button><br/> */}

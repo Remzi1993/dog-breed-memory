@@ -7,7 +7,9 @@ import Render from './render/RandomPictureGame'
 
 class RandomPictureGame extends Component {
     state = {
-        arrayOfOptions: []
+        arrayOfOptions: [],
+        playerAnswer: null,
+        rightAnswer: null
     }
 
     componentDidMount() {
@@ -18,8 +20,27 @@ class RandomPictureGame extends Component {
     handleClick = (event) => {
         // console.log('Button value > ', event.target.value);
         if (event.target.value === this.getCurrentDog()) {
+            console.log('Correct answer!');
+
+            this.setState({ playerAnswer: true })
             this.props.fetchRandomDogImage()
         }
+        else {
+            console.log('Wrong answer!');
+            this.setState({
+                playerAnswer: false,
+                rightAnswer: this.getCurrentDog()
+            })
+            setTimeout(this.tempTimeout, 2000);
+        }
+    }
+
+    tempTimeout = () => {
+        this.setState({
+            playerAnswer: null,
+            rightAnswer: null
+        })
+        this.props.fetchRandomDogImage()
     }
 
     getCurrentDog() {
@@ -50,24 +71,37 @@ class RandomPictureGame extends Component {
 
     render() {
         const dogBreeds = this.props.breeds
-        const randomBreed1 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
-        const randomBreed2 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
 
+        console.log(dogBreeds);
+
+        // const randomBreed1 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+        // const randomBreed2 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
         // console.log('Random breed 1 > ', randomBreed1);
         // console.log('Random breed 2 > ', randomBreed2);
 
-        const options = new Set([this.getCurrentDog(), randomBreed1, randomBreed2]);
+        function randomBreed() {
+            return dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+        }
 
-        const arrayOfOptions = [...options]
+        // console.log(randomBreed());
+
+        for (let i = 0; i < dogBreeds.length; i++) {
+            var options = new Set([this.getCurrentDog(), randomBreed(), randomBreed()]);
+            // console.log('In the for loop > ', options);
+        }
+        // console.log('Outside the for loop > ', options);
+        
+        const arrayOfOptions = [...options]        
+        const shuffledOptions = this.shuffle(arrayOfOptions)
 
         return <>
             <Render
                 randomDogImage = {this.props.randomDogImage}
-                arrayOfOptions = {arrayOfOptions}
-                breeds = {this.state.breeds}
+                shuffledOptions = {shuffledOptions}
                 history = {this.props.history}
                 handleClick = {this.handleClick}
-                shuffle = {this.shuffle}
+                playerAnswer = {this.state.playerAnswer}
+                rightAnswer = {this.state.rightAnswer}
             />
         </>
 

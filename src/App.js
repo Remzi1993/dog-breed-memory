@@ -10,13 +10,13 @@ import Emoji from './components/render/Emoji'
 class App extends Component {
   
   componentDidMount() {
-      var layout   = document.getElementById('layout'),
+      let layout   = document.getElementById('layout'),
           menu     = document.getElementById('menu'),
           menuLink = document.getElementById('menuLink'),
           content  = document.getElementById('main');
   
       function toggleClass(element, className) {
-          var classes = element.className.split(/\s+/),
+          let classes = element.className.split(/\s+/),
               length = classes.length,
               i = 0;
   
@@ -35,7 +35,7 @@ class App extends Component {
       }
   
       function toggleAll(e) {
-          var active = 'active';
+          let active = 'active';
   
           e.preventDefault();
           toggleClass(layout, active);
