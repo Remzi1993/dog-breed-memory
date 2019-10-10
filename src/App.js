@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import ListBreeds from './components/ListBreeds'
 import { Route } from 'react-router-dom'
-import HomePage from './components/HomePage'
+import HomePage from './components/render/HomePage'
 import BreedDetails from './components/BreedDetails'
 import RandomPictureGame from './components/RandomPictureGame'
 import { Link } from 'react-router-dom'
+import Emoji from './components/render/Emoji'
 
 class App extends Component {
   
@@ -77,8 +78,8 @@ class App extends Component {
 
         <div id="main">
           <div className="header">
-            <h1>The 🐶 app</h1>
-            <h2>A group project made with ❤️ at Codaisseur</h2>
+            <h1>The <Emoji symbol="🐶" label="Dog Face"/> app</h1>
+            <h2>A group project made with <Emoji symbol="❤️" label="Red Heart"/> at Codaisseur</h2>
           </div>
           <div className="content">
           <Route component={HomePage} exact path="/"/> 

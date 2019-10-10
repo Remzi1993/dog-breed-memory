@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchRandomPic } from '../actions/getRandomPic'
-import { fetchBreedList } from '../actions/breeds'
+import { fetchRandomDogImage } from '../actions/fetchRandomDogImage'
+import { fetchBreedList } from '../actions/fetchBreedList'
 import Render from './render/RandomPictureGame'
 
 
@@ -11,22 +11,22 @@ class RandomPictureGame extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchRandomPic()
+        this.props.fetchRandomDogImage()
         this.props.fetchBreedList()
     }
 
     handleClick = (event) => {
         // console.log('Button value > ', event.target.value);
         if (event.target.value === this.getCurrentDog()) {
-            this.props.fetchRandomPic()
+            this.props.fetchRandomDogImage()
         }
     }
 
     getCurrentDog() {
-        const randomPicture = this.props.randomPicture
+        const randomDogImage = this.props.randomDogImage
         // Below we split the url with / than we get an array, sometimes in that array we get also the alternative name
         // we split that also en we select the first item
-        return randomPicture === null ? null : randomPicture.split('/')[4].split('-')[0]
+        return randomDogImage === null ? null : randomDogImage.split('/')[4].split('-')[0]
     }
 
     shuffle(array) {
@@ -62,7 +62,7 @@ class RandomPictureGame extends Component {
 
         return <>
             <Render
-                randomPicture = {this.props.randomPicture}
+                randomDogImage = {this.props.randomDogImage}
                 arrayOfOptions = {arrayOfOptions}
                 breeds = {this.state.breeds}
                 history = {this.props.history}
@@ -75,13 +75,13 @@ class RandomPictureGame extends Component {
 }
 
 const mapDispatchToProps = {
-    fetchRandomPic,
+    fetchRandomDogImage,
     fetchBreedList
 }
 
 const mapStateToProps = (state) => {
     return {
-        randomPicture: state.picture,
+        randomDogImage: state.randomDogImage,
         breeds: state.breeds
     }
 }

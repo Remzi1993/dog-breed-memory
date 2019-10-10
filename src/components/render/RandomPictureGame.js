@@ -1,18 +1,18 @@
 import React from 'react'
-import Button from '../Button';
+import Button from './Button';
 
 export default (props) => {
     // console.log(props);
     if(!props.arrayOfOptions) {
         return '.....loading!'
     }
-
     const shuffledOptions = props.shuffle(props.arrayOfOptions)
+    
     return <>
         <h2 className="content-subhead">Game 1</h2>
         <p>Random dog game</p>
         <button onClick={() => props.history.push('/')} className="pure-button pure-button-primary">Go Back</button><br/><br/>
-        <div className="pure-u-1"><img className="pure-img-responsive" src={props.randomPicture} alt="Random dog" /></div>
+        <div className="pure-u-1"><img className="pure-img-responsive" src={props.randomDogImage} alt="Random dog" /></div>
         {shuffledOptions.map((option, index) => (
             <Button key={index} onClick={props.handleClick} value={option}>{option}</Button>
         ))}

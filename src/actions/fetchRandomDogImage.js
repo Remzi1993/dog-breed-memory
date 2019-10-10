@@ -1,12 +1,12 @@
-export const setRandomPic = (picture) => {
+export const setRandomDogImage = (randomDogImage) => {
     return {
-        type: 'SET_RANDOM_PIC',
-        payload: picture
+        type: 'SET_RANDOM_DOG_IMG',
+        payload: randomDogImage
     }
 }
 
 // THUNK ACTION CREATOR
-export const fetchRandomPic = () => {
+export const fetchRandomDogImage = () => {
     return function (dispatch, getState) {
         // const currentPicture = getState().picture
 
@@ -20,7 +20,7 @@ export const fetchRandomPic = () => {
         fetch('https://dog.ceo/api/breeds/image/random')
             .then(response => response.json())
             .then(data => {
-                dispatch(setRandomPic(data.message))
+                dispatch(setRandomDogImage(data.message))
             }).catch(
                 error => console.log(error)
             )

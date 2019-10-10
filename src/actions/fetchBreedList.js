@@ -14,7 +14,7 @@ export const fetchBreedList = () => {
         const currentBreeds = getState().breeds
 
         if (currentBreeds.length !== 0) {
-            // console.log('Empty!');
+            console.log("It's already fetched in the past! So we don't fetch it again :)");
             return
         }
 
