@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import BreedDetails from './components/BreedDetails'
 import RandomPictureGame from './components/RandomPictureGame'
+import Game2 from './components/Game2'
 import { Link } from 'react-router-dom'
 
 class App extends Component {
@@ -71,6 +72,9 @@ class App extends Component {
               <li className="pure-menu-item">
                 <Link className="pure-menu-link" to="/game-1">Game 1</Link>
               </li>
+              <li className="pure-menu-item">
+                <Link className="pure-menu-link" to="/game-2">Game 2</Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -85,6 +89,7 @@ class App extends Component {
           <Route component={ListBreeds} exact path="/breeds"/> 
           <Route component={BreedDetails} exact path="/breeds/:breed"/>
           <Route component={RandomPictureGame} exact path="/game-1"/>
+          <Route component={Game2} exact path="/game-2"/>
           </div>
         </div>
     </div>
