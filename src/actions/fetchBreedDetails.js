@@ -1,11 +1,10 @@
-export const setBreedDetails = (images) => {
+export const setBreedDetails = (breedImages) => {
     return {
         type: 'SET_BREED_DETAILS',
-        payload: images
+        payload: breedImages
     }
 }
 
-// THUNK ACTION CREATOR
 export const fetchBreedDetails = (breed) => {
     return function (dispatch, getState) {
         fetch(`https://dog.ceo/api/breed/${encodeURIComponent(breed)}/images`)

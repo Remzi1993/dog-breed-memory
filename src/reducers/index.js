@@ -1,7 +1,7 @@
 const initialState = {
     breeds: [],
-    images: null,
-    picture: null
+    breedImages: [],
+    randomDogImage: null
 }
 
 const reducer = (state = initialState, action = {}) => {
@@ -9,9 +9,9 @@ const reducer = (state = initialState, action = {}) => {
         case 'SET_BREED_LIST':
             return { ...state, breeds: action.payload } // dogBreeds
         case 'SET_BREED_DETAILS':
-            return { ...state, images: action.payload } // SpecificDogBreedImages
-        case 'SET_RANDOM_PIC':
-            return { ...state, picture: action.payload } // RandomDogBreedImage
+            return { ...state, breedImages: action.payload } // SpecificDogBreedImages
+        case 'SET_RANDOM_DOG_IMG':
+            return { ...state, randomDogImage: action.payload } // RandomDogBreedImage
         default:
             return state
     }
