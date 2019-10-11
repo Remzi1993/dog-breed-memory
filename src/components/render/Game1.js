@@ -1,15 +1,19 @@
 import React from 'react'
 import Button from './Button';
+import Emoji from './Emoji'
+import Loading from './Loading'
 
 export default (props) => {
     // console.log(props);
-    if (props.shuffledOptions.length === 0) {
-        return <h2 className="content-subhead">Loading...</h2>
+    if ( props.randomDogImage === null || props.shuffledOptions.length === 0 ) {
+        return <>
+            <h2 className="content-subhead">We are loading your game <Emoji symbol="😜" label="Winking Face With Tongue"/></h2>
+            <Loading/>
+        </>
     }
 
-    console.log(props.playerAnswer);
-    console.log('Prencentage 2 > ', props.percentage);
-
+    // console.log(props.playerAnswer);
+    // console.log('Prencentage > ', props.percentage);
 
     return <>
         <h2 className="content-subhead">The Dog Quiz</h2>
@@ -29,10 +33,9 @@ export default (props) => {
             ))}
         </p> }
 
-        <div>Your percentage: <span>{props.percentage}%</span></div>
-        
-        {/* <button onClick={props.handleClick} value={shuffledOptions[0]}>Option 1 > {shuffledOptions[0]}</button><br/>
-        <button onClick={props.handleClick} value={shuffledOptions[1]}>Option 2 > {shuffledOptions[1]}</button><br/>
-        <button onClick={props.handleClick} value={shuffledOptions[2]}>Option 3 > {shuffledOptions[2]}</button><br/> */}
+        <h2>Stats</h2>
+        <p>Your percentage: {Math.round(props.percentage)}%<br/>
+        Correct answers: {props.countCorrectAnswers}<br/>
+        Incorrect asnwers: {props.countIncorrectAnswers}</p>
     </>
 }

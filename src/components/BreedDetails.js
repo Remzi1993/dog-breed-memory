@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchBreedDetails } from '../actions/fetchBreedDetails'
+import Emoji from './render/Emoji'
+import Loading from './render/Loading'
 
 class BreedDetailsContainer extends Component {
   state = {
@@ -12,11 +14,19 @@ class BreedDetailsContainer extends Component {
   }
 
   render() {
+    // console.log('Name: ', this.props.match.params.breed);
+    if ( this.props.match.params.breed == '' ) {
+      return <>
+          <h2 className="content-subhead">We are loading the list <Emoji symbol="😉" label="Winking Face"/></h2>
+          <Loading/>
+      </>
+    }
+    
     const images = this.props.breedImages
 
     return <>
-      <h2 className="content-subhead">Dog breed images</h2>
-      <p>This page will show images of a specific dog breed.</p>
+      <h2 className="content-subhead">The {this.props.match.params.breed} dog breed</h2>
+      <p>Below you will see 10 images of the {this.props.match.params.breed} breed.</p>
       <button onClick={() => this.props.history.push('/breeds')} className="pure-button pure-button-primary">Go Back</button>
       <br/><br/>
 
