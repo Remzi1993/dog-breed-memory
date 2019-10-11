@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchRandomDogImage } from '../actions/fetchRandomDogImage'
 import { fetchBreedList } from '../actions/fetchBreedList'
-import Render from './render/RandomPictureGame'
+import Render from './render/Game1'
 
 
 class RandomPictureGame extends Component {
@@ -23,7 +23,7 @@ class RandomPictureGame extends Component {
     handleClick = (event) => {
         // console.log('Button value > ', event.target.value);
         if (event.target.value === this.getCurrentDog()) {
-            console.log('Correct answer!');
+            // console.log('Correct answer!');
 
             this.setState({
                 playerAnswer: true,
@@ -31,11 +31,11 @@ class RandomPictureGame extends Component {
                 total: this.state.total + 1
 
             })
-            console.log('countCorrectAnswers > ', this.state.countCorrectAnswers);
+            // console.log('countCorrectAnswers > ', this.state.countCorrectAnswers);
             this.props.fetchRandomDogImage()
         }
         else {
-            console.log('Wrong answer!');
+            // console.log('Wrong answer!');
             this.setState({
                 playerAnswer: false,
                 rightAnswer: this.getCurrentDog(),
@@ -43,7 +43,7 @@ class RandomPictureGame extends Component {
                 total: this.state.total + 1
             })
 
-            console.log('countIncorrectAnswers > ', this.state.countIncorrectAnswers);
+            // console.log('countIncorrectAnswers > ', this.state.countIncorrectAnswers);
             setTimeout(this.tempTimeout, 2000);
         }
     }
@@ -111,6 +111,8 @@ class RandomPictureGame extends Component {
             handleClick = {this.handleClick}
             playerAnswer = {this.state.playerAnswer}
             rightAnswer = {this.state.rightAnswer}
+            countCorrectAnswers = {this.state.countCorrectAnswers}
+            countIncorrectAnswers = {this.state.countIncorrectAnswers}
             percentage = {percentage}
         />
     }

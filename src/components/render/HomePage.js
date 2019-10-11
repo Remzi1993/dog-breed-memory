@@ -12,6 +12,8 @@ export default () => {
         <li>When you click one of the breeds on the doglist page you should go to a page that shows 10 pictures of that breed. So the user can see what a breed looks like.</li>
         <li>The app contains a game which must show the user a random picture of a dog and it must ask the user to choose the correct breed name from a list of 3 options.</li>
         <li>When a user makes the correct choice, they proceed to the next question.</li>
+        <li>If the user makes the wrong choice, the game should show them the right answer, then pause for 2 seconds before proceeding to the next question.</li>
+        <li>The game must keep track of the user’s performance and display a success rate (in percentages) on the page.</li>
       </ol>
   </>
 }

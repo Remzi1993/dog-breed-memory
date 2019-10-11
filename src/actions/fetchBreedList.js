@@ -1,6 +1,3 @@
-// actions
-// ACTION CREATOR
-// NORMAL ACTION CREATOR
 export const setBreedList = (breeds) => {
     return {
         type: 'SET_BREED_LIST',
@@ -8,13 +5,12 @@ export const setBreedList = (breeds) => {
     }
 }
 
-// THUNK ACTION CREATOR
 export const fetchBreedList = () => {
     return function (dispatch, getState) {
         const currentBreeds = getState().breeds
 
         if (currentBreeds.length !== 0) {
-            console.log("It's already fetched in the past! So we don't fetch it again :)");
+            // console.log("It's already fetched in the past! So we don't fetch it again :)");
             return
         }
 
