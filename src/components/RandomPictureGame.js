@@ -9,7 +9,10 @@ class RandomPictureGame extends Component {
     state = {
         arrayOfOptions: [],
         playerAnswer: null,
-        rightAnswer: null
+        rightAnswer: null,
+        countCorrectAnswers: 0,
+        countIncorrectAnswers: 0,
+        total: 0
     }
 
     componentDidMount() {
@@ -22,15 +25,25 @@ class RandomPictureGame extends Component {
         if (event.target.value === this.getCurrentDog()) {
             console.log('Correct answer!');
 
-            this.setState({ playerAnswer: true })
+            this.setState({
+                playerAnswer: true,
+                countCorrectAnswers: this.state.countCorrectAnswers + 1,
+                total: this.state.total + 1
+
+            })
+            console.log('countCorrectAnswers > ', this.state.countCorrectAnswers);
             this.props.fetchRandomDogImage()
         }
         else {
             console.log('Wrong answer!');
             this.setState({
                 playerAnswer: false,
-                rightAnswer: this.getCurrentDog()
+                rightAnswer: this.getCurrentDog(),
+                countIncorrectAnswers: this.state.countIncorrectAnswers + 1,
+                total: this.state.total + 1
             })
+
+            console.log('countIncorrectAnswers > ', this.state.countIncorrectAnswers);
             setTimeout(this.tempTimeout, 2000);
         }
     }
@@ -69,42 +82,37 @@ class RandomPictureGame extends Component {
         return array;
     }
 
-    render() {
+    randomBreed() {
         const dogBreeds = this.props.breeds
+        return dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+    }
 
-        console.log(dogBreeds);
+    render() {
+        let percentage = 0
+        const correct = this.state.countCorrectAnswers
+        const total = this.state.total
 
-        // const randomBreed1 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
-        // const randomBreed2 = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
-        // console.log('Random breed 1 > ', randomBreed1);
-        // console.log('Random breed 2 > ', randomBreed2);
-
-        function randomBreed() {
-            return dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+        if (total !== 0) {
+            percentage = correct/total*100
         }
-
-        // console.log(randomBreed());
-
-        for (let i = 0; i < dogBreeds.length; i++) {
-            var options = new Set([this.getCurrentDog(), randomBreed(), randomBreed()]);
-            // console.log('In the for loop > ', options);
-        }
-        // console.log('Outside the for loop > ', options);
         
-        const arrayOfOptions = [...options]        
+        const options = new Set([this.getCurrentDog(), this.randomBreed(), this.randomBreed()]);
+        const arrayOfOptions = [...options]
+
+        while (arrayOfOptions.length < 3) {
+            arrayOfOptions.push(this.randomBreed())
+        }
         const shuffledOptions = this.shuffle(arrayOfOptions)
 
-        return <>
-            <Render
-                randomDogImage = {this.props.randomDogImage}
-                shuffledOptions = {shuffledOptions}
-                history = {this.props.history}
-                handleClick = {this.handleClick}
-                playerAnswer = {this.state.playerAnswer}
-                rightAnswer = {this.state.rightAnswer}
-            />
-        </>
-
+        return <Render
+            randomDogImage = {this.props.randomDogImage}
+            shuffledOptions = {shuffledOptions}
+            history = {this.props.history}
+            handleClick = {this.handleClick}
+            playerAnswer = {this.state.playerAnswer}
+            rightAnswer = {this.state.rightAnswer}
+            percentage = {percentage}
+        />
     }
 }
 

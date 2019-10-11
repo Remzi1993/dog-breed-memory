@@ -7,7 +7,9 @@ export default (props) => {
         return <h2 className="content-subhead">Loading...</h2>
     }
 
-    console.log(props.playerAnswer); 
+    console.log(props.playerAnswer);
+    console.log('Prencentage 2 > ', props.percentage);
+
 
     return <>
         <h2 className="content-subhead">The Dog Quiz</h2>
@@ -26,6 +28,8 @@ export default (props) => {
                 <Button key={index} onClick={props.handleClick} value={option}>{option}</Button>
             ))}
         </p> }
+
+        <div>Your percentage: <span>{props.percentage}%</span></div>
         
         {/* <button onClick={props.handleClick} value={shuffledOptions[0]}>Option 1 > {shuffledOptions[0]}</button><br/>
         <button onClick={props.handleClick} value={shuffledOptions[1]}>Option 2 > {shuffledOptions[1]}</button><br/>
