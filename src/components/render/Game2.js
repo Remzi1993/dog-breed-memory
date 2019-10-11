@@ -28,7 +28,7 @@ export default (props) => {
         <p>Random dog game</p>
         <button onClick={() => props.history.push('/')} className="pure-button pure-button-primary">Go Back</button><br/><br/>
 
-        <h3>Three images</h3>
+        <h3>Pick the {props.rightAnswer} dog breed</h3>
 
         <div className="pure-g">
             {props.shuffledImages.map((image, index) => (  
@@ -38,7 +38,10 @@ export default (props) => {
             ))}
         </div>
 
-
+        <h2>Stats</h2>
+        <p>Your percentage: {Math.round(props.percentage)}%<br/>
+        Correct answers: {props.countCorrectAnswers}<br/>
+        Incorrect asnwers: {props.countIncorrectAnswers}</p>
 
 
     </>

@@ -14,6 +14,7 @@ export default () => {
         <li>When a user makes the correct choice, they proceed to the next question.</li>
         <li>If the user makes the wrong choice, the game should show them the right answer, then pause for 2 seconds before proceeding to the next question.</li>
         <li>The game must keep track of the user’s performance and display a success rate (in percentages) on the page.</li>
+        <li>The app contains a second game where the user will get a different question type. This game must show the user the name of a breed and 3 images of dogs. The user must select the correct image that matches the breed name.</li>
       </ol>
   </>
 }

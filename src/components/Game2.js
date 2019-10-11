@@ -8,12 +8,12 @@ import Render from './render/Game2'
 
 class RandomPictureGame extends Component {
     state = {
-        // arrayOfOptions: [],
-        // playerAnswer: null,
-        // rightAnswer: null,
-        // countCorrectAnswers: 0,
-        // countIncorrectAnswers: 0,
-        // total: 0
+        shuffledImages: [],
+        playerAnswer: null,
+        rightAnswer: null,
+        countCorrectAnswers: 0,
+        countIncorrectAnswers: 0,
+        total: 0
     }
 
     componentDidMount() {
@@ -52,8 +52,7 @@ class RandomPictureGame extends Component {
         
         if (imageURL === this.props.randomDogImage) {
             // console.log('Correct answer!');
-            this.props.fetchRandomDogImage()
-            this.props.fetchRandomDogImages()
+
 
             this.setState({
                 playerAnswer: true,
@@ -61,13 +60,12 @@ class RandomPictureGame extends Component {
                 total: this.state.total + 1
 
             })
-            // console.log('countCorrectAnswers > ', this.state.countCorrectAnswers);
-            // this.props.fetchRandomDogImage()
+            console.log('countCorrectAnswers > ', this.state.countCorrectAnswers);
+            this.props.fetchRandomDogImage()
+            this.props.fetchRandomDogImages()
         }
         else {
             // console.log('Wrong answer!');
-            this.props.fetchRandomDogImage()
-            this.props.fetchRandomDogImages()
             
             this.setState({
                 playerAnswer: false,
@@ -76,8 +74,11 @@ class RandomPictureGame extends Component {
                 total: this.state.total + 1
             })
 
-            // console.log('countIncorrectAnswers > ', this.state.countIncorrectAnswers);
+            console.log('countIncorrectAnswers > ', this.state.countIncorrectAnswers);
             setTimeout(this.tempTimeout, 2000);
+
+            this.props.fetchRandomDogImage()
+            this.props.fetchRandomDogImages()
         }
     }
 
@@ -93,16 +94,25 @@ class RandomPictureGame extends Component {
 
         const shuffledImages = this.shuffle(dogImages)
         // console.log('shuffledImages > ', shuffledImages)
-        
+
+        let percentage = 0
+        const correct = this.state.countCorrectAnswers
+        const total = this.state.total
+
+        if (total !== 0) {
+            percentage = correct/total*100
+        }
         
         return <Render
             history = {this.props.history}
             shuffledImages = {shuffledImages}
             handleClick = {this.handleClick}
+            playerAnswer = {this.state.playerAnswer}
+            rightAnswer = {this.getCurrentDog()}
+            countCorrectAnswers = {this.state.countCorrectAnswers}
+            countIncorrectAnswers = {this.state.countIncorrectAnswers}
+            percentage = {percentage}
 
-            // playerAnswer = {this.state.playerAnswer}
-            // rightAnswer = {this.state.rightAnswer}
-            // percentage = {percentage}
         />
     }
 }
