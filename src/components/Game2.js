@@ -84,6 +84,7 @@ const mapStateToProps = (state) => {
     return {
         randomPicture: state.picture,
         breeds: state.breeds
+        
     }
 }
 
